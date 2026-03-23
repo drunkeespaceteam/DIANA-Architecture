@@ -21,7 +21,8 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 ```text
 artifacts-monorepo/
 ├── artifacts/              # Deployable applications
-│   └── api-server/         # Express API server
+│   ├── api-server/         # Express API server
+│   └── synapse/            # SYNAPSE intelligent chip (Python 3.12)
 ├── lib/                    # Shared libraries
 │   ├── api-spec/           # OpenAPI spec + Orval codegen config
 │   ├── api-client-react/   # Generated React Query hooks
@@ -90,6 +91,19 @@ Generated Zod schemas from the OpenAPI spec (e.g. `HealthCheckResponse`). Used b
 ### `lib/api-client-react` (`@workspace/api-client-react`)
 
 Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHealthCheck`, `healthCheck`).
+
+### `artifacts/synapse` — SYNAPSE Intelligent Chip (Python 3.12)
+
+Pattern-recognition chip that learns task sequences and predicts the next task.
+
+- Entry: `main.py` — CLI with `--demo`, `--tasks`, `--file`, `--order` flags
+- Core: `synapse/core.py` — `SynapseChip` class (n-gram Markov chain)
+- Display: `synapse/display.py` — formatted console output
+- REPL: `synapse/repl.py` — interactive session
+- Tests: `tests/test_synapse.py` — 11 unit tests
+- Run demo: `python3 artifacts/synapse/main.py --demo`
+- Run REPL: `python3 artifacts/synapse/main.py`
+- Run tests: `python3 artifacts/synapse/tests/test_synapse.py`
 
 ### `scripts` (`@workspace/scripts`)
 
