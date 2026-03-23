@@ -96,8 +96,9 @@ Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHea
 
 Pattern-recognition chip that learns task sequences and predicts the next task.
 
-- Entry: `main.py` — CLI with `--demo`, `--tasks`, `--file`, `--order` flags
+- Entry: `main.py` — CLI with `--demo`, `--tasks`, `--file`, `--order`, `--heal` flags
 - Core: `synapse/core.py` — `SynapseChip` class (n-gram Markov chain)
+- Healing: `synapse/healing.py` — `HealingChip` class (Phase 5 self-healing layer)
 - Display: `synapse/display.py` — formatted console output
 - REPL: `synapse/repl.py` — interactive session
 - Tests: `tests/test_synapse.py` — 11 unit tests
@@ -105,10 +106,12 @@ Pattern-recognition chip that learns task sequences and predicts the next task.
 - Run DIANA P2P scenario: `python3 artifacts/synapse/main.py --diana`
 - Run Phase 3 benchmark: `python3 artifacts/synapse/main.py --benchmark`
 - Run Phase 4 visualization: `python3 artifacts/synapse/main.py --visualize`
+- Run Phase 5 self-healing: `python3 artifacts/synapse/main.py --heal`
 - Run REPL: `python3 artifacts/synapse/main.py`
 - Run tests: `python3 artifacts/synapse/tests/test_synapse.py`
 - Phase 3 benchmark: `diana/benchmark_tasks.py` (task defs), `diana/benchmark_engine.py` (simulation), `diana/benchmark_display.py` (report renderer)
 - Phase 4 visualization: `diana/viz_engine.py` (rendering primitives: graph, animation, feed), `diana/visualizer.py` (dashboard scenario runner)
+- Phase 5 self-healing: `diana/phase5_display.py` (display engine), `diana/phase5_runner.py` (simulation runner), `synapse/healing.py` (HealingChip with adaptive confidence weights)
 
 ### `scripts` (`@workspace/scripts`)
 
