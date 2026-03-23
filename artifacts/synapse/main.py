@@ -108,6 +108,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Run the DIANA Phase 2 P2P architecture simulation",
     )
     parser.add_argument(
+        "--benchmark",
+        action="store_true",
+        help="Run the DIANA Phase 3 benchmark: Traditional vs DIANA architecture",
+    )
+    parser.add_argument(
         "--order",
         type=int,
         default=2,
@@ -118,6 +123,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
+
+    if args.benchmark:
+        from diana.benchmark import run_benchmarks
+        run_benchmarks()
+        return
 
     if args.diana:
         from diana.scenario import run_diana_scenario
