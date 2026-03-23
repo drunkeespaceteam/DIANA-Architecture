@@ -142,6 +142,38 @@ class SynapseBrain:
         ]
 
     # ------------------------------------------------------------------
+    # Export
+    # ------------------------------------------------------------------
+
+    def save_torchscript(self, path: str = "synapse_model.pt") -> str:
+        """
+        Export the trained LSTM as a TorchScript file loadable from C++.
+
+        Uses torch.jit.trace with a representative input (window-length
+        sequence of zeros) so the graph is fully specialised for the
+        input shape expected at runtime.
+
+        Args:
+            path: Destination file path.  Defaults to ``synapse_model.pt``
+                  in the current working directory.
+
+        Returns:
+            The resolved file path that was written.
+
+        Example (C++)::
+
+            torch::jit::script::Module mod = torch::jit::load("synapse_model.pt");
+            auto input = torch::zeros({1, window}, torch::kLong);
+            auto logits = mod.forward({input}).toTensor();
+        """
+        self.model.eval()
+        sample = torch.zeros(1, self.window, dtype=torch.long)
+        traced = torch.jit.trace(self.model, sample)
+        traced.save(path)
+        self.model.train()
+        return path
+
+    # ------------------------------------------------------------------
     # Introspection
     # ------------------------------------------------------------------
 
