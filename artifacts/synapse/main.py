@@ -1,12 +1,17 @@
 """
-SYNAPSE — CLI entry point.
+DIANA Architecture — SYNAPSE Chip Simulation
+CLI entry point.
 
 Usage:
-  python main.py                          # interactive REPL
-  python main.py --tasks "A,B,A,B,A"     # train then predict
-  python main.py --file tasks.txt        # read tasks from a file
-  python main.py --demo                  # run built-in demo
-  python main.py --diana                 # Phase 2: DIANA P2P Architecture
+  python main.py --demo        Phase 1: built-in learning demo
+  python main.py               Phase 1: interactive REPL
+  python main.py --diana       Phase 2: P2P multi-chip simulation
+  python main.py --benchmark   Phase 3: Traditional vs DIANA benchmark
+  python main.py --visualize   Phase 4: real-time network visualization
+
+  python main.py --tasks "A,B,A,B,A"    train on comma-separated tasks
+  python main.py --file tasks.txt        train from file (one task per line)
+  python main.py --order 3               set n-gram context window (default 2)
 """
 
 from __future__ import annotations

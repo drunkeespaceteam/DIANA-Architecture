@@ -14,7 +14,7 @@ HEADER = r"""
   ╚════██║  ╚██╔╝  ██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝  
   ███████║   ██║   ██║ ╚████║██║  ██║██║     ███████║███████╗
   ╚══════╝   ╚═╝   ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝
-  Intelligent Task Prediction Chip  v0.1.0
+  DIANA Architecture — SYNAPSE Chip Simulation
 """
 
 DIVIDER = "  " + "─" * 58
