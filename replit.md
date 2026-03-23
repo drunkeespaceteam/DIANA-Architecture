@@ -96,22 +96,27 @@ Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHea
 
 Pattern-recognition chip that learns task sequences and predicts the next task.
 
-- Entry: `main.py` — CLI with `--demo`, `--tasks`, `--file`, `--order`, `--heal` flags
+- Entry: `main.py` — CLI with `--demo`, `--tasks`, `--file`, `--order`, `--heal`, `--lstm` flags
 - Core: `synapse/core.py` — `SynapseChip` class (n-gram Markov chain)
 - Healing: `synapse/healing.py` — `HealingChip` class (Phase 5 self-healing layer)
+- Brain: `synapse/brain.py` — `SynapseBrain` LSTM (PyTorch 2.10.0+cpu, Phase 6)
+- RL Agent: `synapse/rl_agent.py` — `RLAgent` Q-learning pre-fetch decision engine (Phase 6)
 - Display: `synapse/display.py` — formatted console output
 - REPL: `synapse/repl.py` — interactive session
 - Tests: `tests/test_synapse.py` — 11 unit tests
+- Python deps: `torch==2.10.0+cpu`, `numpy==2.4.3` (installed via pip)
 - Run demo: `python3 artifacts/synapse/main.py --demo`
 - Run DIANA P2P scenario: `python3 artifacts/synapse/main.py --diana`
 - Run Phase 3 benchmark: `python3 artifacts/synapse/main.py --benchmark`
 - Run Phase 4 visualization: `python3 artifacts/synapse/main.py --visualize`
 - Run Phase 5 self-healing: `python3 artifacts/synapse/main.py --heal`
+- Run Phase 6 LSTM+RL: `python3 artifacts/synapse/main.py --lstm`
 - Run REPL: `python3 artifacts/synapse/main.py`
 - Run tests: `python3 artifacts/synapse/tests/test_synapse.py`
 - Phase 3 benchmark: `diana/benchmark_tasks.py` (task defs), `diana/benchmark_engine.py` (simulation), `diana/benchmark_display.py` (report renderer)
 - Phase 4 visualization: `diana/viz_engine.py` (rendering primitives: graph, animation, feed), `diana/visualizer.py` (dashboard scenario runner)
 - Phase 5 self-healing: `diana/phase5_display.py` (display engine), `diana/phase5_runner.py` (simulation runner), `synapse/healing.py` (HealingChip with adaptive confidence weights)
+- Phase 6 LSTM+RL: `synapse/brain.py` (SynapseBrain LSTM, online training via PyTorch), `synapse/rl_agent.py` (tabular Q-learning pre-fetch agent), `diana/p2p_bus.py` (direct-routing P2P bus, zero CPU hops), `diana/component.py` (Component + CPUObserver), `diana/phase6_display.py` (display engine), `diana/phase6_runner.py` (simulation runner)
 
 ### `scripts` (`@workspace/scripts`)
 

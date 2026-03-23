@@ -9,6 +9,7 @@ Usage:
   python main.py --benchmark   Phase 3: Traditional vs DIANA benchmark
   python main.py --visualize   Phase 4: real-time network visualization
   python main.py --heal        Phase 5: self-healing system simulation
+  python main.py --lstm        Phase 6: LSTM + RL SynapseBrain simulation
 
   python main.py --tasks "A,B,A,B,A"    train on comma-separated tasks
   python main.py --file tasks.txt        train from file (one task per line)
@@ -129,6 +130,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Run the DIANA Phase 5 self-healing system simulation",
     )
     parser.add_argument(
+        "--lstm",
+        action="store_true",
+        help="Run the DIANA Phase 6 LSTM + RL SynapseBrain simulation",
+    )
+    parser.add_argument(
         "--order",
         type=int,
         default=2,
@@ -139,6 +145,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
+
+    if args.lstm:
+        from diana.phase6_runner import run_phase6
+        run_phase6()
+        return
 
     if args.heal:
         from diana.phase5_runner import run_phase5

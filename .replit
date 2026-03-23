@@ -35,7 +35,7 @@ outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python3 artifacts/synapse/main.py --heal"
+args = "python3 artifacts/synapse/main.py --lstm"
 
 [agent]
 stack = "PNPM_WORKSPACE"
