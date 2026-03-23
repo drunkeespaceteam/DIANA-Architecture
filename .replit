@@ -30,12 +30,12 @@ args = "SYNAPSE"
 name = "SYNAPSE"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python3 artifacts/synapse/main.py --demo"
-
 [workflows.workflow.metadata]
 outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 artifacts/synapse/main.py --diana"
 
 [agent]
 stack = "PNPM_WORKSPACE"

@@ -6,6 +6,7 @@ Usage:
   python main.py --tasks "A,B,A,B,A"     # train then predict
   python main.py --file tasks.txt        # read tasks from a file
   python main.py --demo                  # run built-in demo
+  python main.py --diana                 # Phase 2: DIANA P2P Architecture
 """
 
 from __future__ import annotations
@@ -102,6 +103,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Run the built-in demo sequence",
     )
     parser.add_argument(
+        "--diana",
+        action="store_true",
+        help="Run the DIANA Phase 2 P2P architecture simulation",
+    )
+    parser.add_argument(
         "--order",
         type=int,
         default=2,
@@ -112,6 +118,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
+
+    if args.diana:
+        from diana.scenario import run_diana_scenario
+        run_diana_scenario()
+        return
 
     if args.demo:
         run_demo()

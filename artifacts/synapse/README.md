@@ -9,6 +9,11 @@ SYNAPSE uses **n-gram pattern recognition** (a Markov chain approach) to learn w
 ## Quick Start
 
 ```bash
+# Run DIANA Phase 2 — P2P architecture simulation
+python main.py --diana
+```
+
+```bash
 # Interactive REPL — type tasks one by one
 python main.py
 
