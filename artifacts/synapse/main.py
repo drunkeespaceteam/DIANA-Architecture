@@ -113,6 +113,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Run the DIANA Phase 3 benchmark: Traditional vs DIANA architecture",
     )
     parser.add_argument(
+        "--visualize",
+        action="store_true",
+        help="Run the DIANA Phase 4 real-time network visualization dashboard",
+    )
+    parser.add_argument(
         "--order",
         type=int,
         default=2,
@@ -123,6 +128,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
+
+    if args.visualize:
+        from diana.visualizer import run_visualizer
+        run_visualizer()
+        return
 
     if args.benchmark:
         from diana.benchmark import run_benchmarks

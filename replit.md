@@ -104,9 +104,11 @@ Pattern-recognition chip that learns task sequences and predicts the next task.
 - Run demo: `python3 artifacts/synapse/main.py --demo`
 - Run DIANA P2P scenario: `python3 artifacts/synapse/main.py --diana`
 - Run Phase 3 benchmark: `python3 artifacts/synapse/main.py --benchmark`
+- Run Phase 4 visualization: `python3 artifacts/synapse/main.py --visualize`
 - Run REPL: `python3 artifacts/synapse/main.py`
 - Run tests: `python3 artifacts/synapse/tests/test_synapse.py`
 - Phase 3 benchmark: `diana/benchmark_tasks.py` (task defs), `diana/benchmark_engine.py` (simulation), `diana/benchmark_display.py` (report renderer)
+- Phase 4 visualization: `diana/viz_engine.py` (rendering primitives: graph, animation, feed), `diana/visualizer.py` (dashboard scenario runner)
 
 ### `scripts` (`@workspace/scripts`)
 
