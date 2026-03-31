@@ -1,0 +1,64 @@
+menuconfig DIANA_ARCHITECTURE
+	bool "DIANA Architecture — SYNAPSE Chip Support"
+	default y
+	help
+	  Enable DIANA distributed intelligence architecture.
+	  Each hardware component gets its own SYNAPSE chip
+	  intelligence. Components communicate peer to peer.
+	  CPU becomes passive observer.
+
+	  Say Y to enable DIANA-OS features.
+
+config DIANA_RAM_SYNAPSE
+	bool "RAM SYNAPSE Intelligence"
+	depends on DIANA_ARCHITECTURE
+	default y
+	help
+	  Enable SYNAPSE intelligence for RAM component.
+	  Learns memory allocation patterns and predicts
+	  which memory regions will be needed next.
+
+config DIANA_GPU_SYNAPSE
+	bool "GPU SYNAPSE Intelligence"
+	depends on DIANA_ARCHITECTURE
+	default y
+	help
+	  Enable SYNAPSE intelligence for GPU component.
+	  Monitors GPU-heavy processes and predicts
+	  render requirements.
+
+config DIANA_SSD_SYNAPSE
+	bool "SSD SYNAPSE Intelligence"
+	depends on DIANA_ARCHITECTURE
+	default y
+	help
+	  Enable SYNAPSE intelligence for SSD component.
+	  Learns file access patterns and predicts
+	  which files user will access next.
+
+config DIANA_CACHE_SYNAPSE
+	bool "Cache SYNAPSE Intelligence"
+	depends on DIANA_ARCHITECTURE
+	default y
+	help
+	  Enable SYNAPSE intelligence for Cache component.
+	  Predicts cache hits/misses and optimizes
+	  eviction decisions.
+
+config DIANA_P2P_BUS
+	bool "DIANA P2P Component Bus"
+	depends on DIANA_ARCHITECTURE
+	default y
+	help
+	  Enable the P2P message bus between SYNAPSE
+	  components. Components communicate directly
+	  without CPU involvement.
+
+config DIANA_CPU_OBSERVER
+	bool "DIANA CPU Passive Observer"
+	depends on DIANA_ARCHITECTURE
+	default y
+	help
+	  Enable CPU passive observer mode. CPU receives
+	  status updates only and never issues commands.
+	  commands_issued is permanently locked at 0.
