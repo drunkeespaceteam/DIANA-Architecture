@@ -1,0 +1,1 @@
+savedcmd_/mnt/c/Users/ELCOT/.gemini/antigravity/scratch/DIANA-Architecture/kernel/modules.order := {   echo /mnt/c/Users/ELCOT/.gemini/antigravity/scratch/DIANA-Architecture/kernel/diana_core.o; :; } > /mnt/c/Users/ELCOT/.gemini/antigravity/scratch/DIANA-Architecture/kernel/modules.order

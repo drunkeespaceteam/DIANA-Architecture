@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIANA-Nexus — Booting</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0b10;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .boot-bg {
+            position: absolute;
+            width: 100%; height: 100%;
+            z-index: -1;
+        }
+        .boot-bg .ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            animation: expand 3s infinite ease-out;
+        }
+        .ring:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
+        .ring:nth-child(2) { width: 350px; height: 350px; animation-delay: 0.5s; }
+        .ring:nth-child(3) { width: 500px; height: 500px; animation-delay: 1s; }
+
+        @keyframes expand {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .logo-symbol {
+            font-size: 4rem;
+            color: #00f0ff;
+            filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.6));
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            margin-top: 12px;
+        }
+        .logo-subtitle {
+            color: #9499ab;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            margin-top: 8px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .boot-log {
+            width: 600px;
+            max-width: 90vw;
+            background: rgba(20, 22, 30, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            font-size: 0.8rem;
+            line-height: 1.8;
+            color: #6b7280;
+            backdrop-filter: blur(12px);
+        }
+        .boot-log .line {
+            opacity: 0;
+            animation: fadeLine 0.3s forwards;
+        }
+        .boot-log .ok { color: #00ff88; }
+        .boot-log .info { color: #00f0ff; }
+        .boot-log .warn { color: #ffb800; }
+
+        @keyframes fadeLine {
+            to { opacity: 1; }
+        }
+
+        .progress-container {
+            width: 600px;
+            max-width: 90vw;
+            margin-top: 24px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00f0ff, #00ff88);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+            transition: width 0.4s ease;
+        }
+        .progress-label {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: #9499ab;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="boot-bg">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+    </div>
+
+    <div class="logo-container">
+        <div class="logo-symbol">✦</div>
+        <div class="logo-text">DIANA-NEXUS</div>
+        <div class="logo-subtitle">DISTRIBUTED INTELLIGENT AUTONOMOUS NEURAL ARCHITECTURE</div>
+    </div>
+
+    <div class="boot-log" id="boot-log"></div>
+
+    <div class="progress-container">
+        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+        <div class="progress-label" id="progress-label">INITIALIZING SYNAPSE...</div>
+    </div>
+
+    <script>
+        const BOOT_SEQUENCE = [
+            { text: "[KERNEL] Mounting proc, sysfs, devtmpfs...", cls: "info", delay: 300 },
+            { text: "[  OK  ] Filesystems mounted.", cls: "ok", delay: 200 },
+            { text: "[KERNEL] Loading DIANA-Nexus Kernel v1.0...", cls: "info", delay: 400 },
+            { text: "[DIANA ] P2P bus initialized", cls: "ok", delay: 150 },
+            { text: "[DIANA ] CPU Observer: PASSIVE mode (commands: 0)", cls: "ok", delay: 200 },
+            { text: "[DIANA ] kprobe on __kmalloc registered", cls: "ok", delay: 150 },
+            { text: "[DIANA ] kprobe on vfs_read registered", cls: "ok", delay: 150 },
+            { text: "[DIANA ] kprobe on scheduler registered", cls: "ok", delay: 200 },
+            { text: "[DIANA ] RAM SYNAPSE chip initialized", cls: "ok", delay: 100 },
+            { text: "[DIANA ] GPU SYNAPSE chip initialized", cls: "ok", delay: 100 },
+            { text: "[DIANA ] SSD SYNAPSE chip initialized", cls: "ok", delay: 100 },
+            { text: "[DIANA ] CACHE SYNAPSE chip initialized", cls: "ok", delay: 100 },
+            { text: "[DIANA ] /proc/diana/ interface created", cls: "ok", delay: 200 },
+            { text: "[SYSTEM] Starting DIANA-Nexus GUI Server on :8080...", cls: "info", delay: 400 },
+            { text: "[  OK  ] GUI Server running.", cls: "ok", delay: 200 },
+            { text: "[SYSTEM] Starting SYNAPSE AI Training Daemon...", cls: "info", delay: 300 },
+            { text: "[  OK  ] LSTM brain online. Q-Learning agents active.", cls: "ok", delay: 300 },
+            { text: "[SYSTEM] Starting X11 display server...", cls: "info", delay: 500 },
+            { text: "[  OK  ] Display :0 ready.", cls: "ok", delay: 200 },
+            { text: "[SYSTEM] Launching DIANA-Nexus Desktop...", cls: "info", delay: 600 },
+        ];
+
+        const log = document.getElementById("boot-log");
+        const progress = document.getElementById("progress");
+        const label = document.getElementById("progress-label");
+        let idx = 0;
+
+        function addLine() {
+            if (idx >= BOOT_SEQUENCE.length) {
+                label.textContent = "BOOT COMPLETE — LOADING DESKTOP";
+                progress.style.width = "100%";
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1200);
+                return;
+            }
+
+            const item = BOOT_SEQUENCE[idx];
+            const div = document.createElement("div");
+            div.className = "line " + item.cls;
+            div.textContent = item.text;
+            div.style.animationDelay = "0s";
+            log.appendChild(div);
+            log.scrollTop = log.scrollHeight;
+
+            const pct = ((idx + 1) / BOOT_SEQUENCE.length) * 100;
+            progress.style.width = pct + "%";
+            label.textContent = item.text.split("]")[1]?.trim() || "BOOTING...";
+
+            idx++;
+            setTimeout(addLine, item.delay);
+        }
+
+        setTimeout(addLine, 800);
+    </script>
+</body>
+</html>

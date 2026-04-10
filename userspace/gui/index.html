@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIANA-Nexus Desktop</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="os-background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <div id="desktop-container">
+        <!-- Top Bar -->
+        <header class="topbar glass">
+            <div class="brand">
+                <span class="logo">✦</span> DIANA-Nexus
+            </div>
+            <div class="status-indicator">
+                <div class="pulse-dot"></div>
+                <span>SYNAPSE AI ACTIVE</span>
+            </div>
+            <div class="topbar-right">
+                <button class="topbar-btn" id="btn-terminal" title="Terminal">⌨</button>
+                <button class="topbar-btn" id="btn-files" title="Files">📁</button>
+                <button class="topbar-btn" id="btn-settings" title="AI Settings">⚙</button>
+                <div class="system-time" id="clock">00:00</div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard" id="main-dashboard">
+            <div class="nexus-core glass">
+                <div class="core-header">
+                    <h2>Central Observer (CPU)</h2>
+                    <span class="badge success">Passive Observer Mode</span>
+                </div>
+                <div class="core-stats">
+                    <div class="stat-box">
+                        <span class="label">CPU Usage</span>
+                        <span class="value" id="cpu-usage">0.1%</span>
+                        <div class="progress-bar"><div class="fill" id="cpu-fill" style="width: 1%;"></div></div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">Commands Issued</span>
+                        <span class="value emphasis" id="cpu-commands">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">Learning Cycles</span>
+                        <span class="value" id="learn-cycles">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">Prediction Accuracy</span>
+                        <span class="value" id="pred-accuracy">—</span>
+                    </div>
+                </div>
+                <p class="description">Neural P2P components are communicating directly hardware-to-hardware. Traditional von Neumann bottleneck bypassed. The system learns from your usage and gets faster over time.</p>
+            </div>
+
+            <div class="components-grid">
+                <!-- RAM Node -->
+                <div class="component-card glass" id="node-ram">
+                    <div class="card-header">
+                        <h3>🧠 RAM</h3>
+                        <span class="ai-status">Learning...</span>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric"><span class="m-label">RL Confidence</span> <span class="m-value" id="ram-conf">85%</span></div>
+                        <div class="metric"><span class="m-label">Memory Wall Hit</span> <span class="m-value" id="ram-miss">0 ms</span></div>
+                        <div class="metric"><span class="m-label">Patterns Learned</span> <span class="m-value" id="ram-patterns">0</span></div>
+                    </div>
+                    <div class="ai-action" id="ram-action">Prefetching next texture block...</div>
+                </div>
+
+                <!-- GPU Node -->
+                <div class="component-card glass" id="node-gpu">
+                    <div class="card-header">
+                        <h3>🎮 GPU</h3>
+                        <span class="ai-status">Optimizing</span>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric"><span class="m-label">RL Confidence</span> <span class="m-value" id="gpu-conf">92%</span></div>
+                        <div class="metric"><span class="m-label">Draw Calls</span> <span class="m-value" id="gpu-draw">Direct P2P</span></div>
+                        <div class="metric"><span class="m-label">Patterns Learned</span> <span class="m-value" id="gpu-patterns">0</span></div>
+                    </div>
+                    <div class="ai-action" id="gpu-action">Receiving buffers from RAM directly.</div>
+                </div>
+
+                <!-- SSD Node -->
+                <div class="component-card glass" id="node-ssd">
+                    <div class="card-header">
+                        <h3>💾 SSD</h3>
+                        <span class="ai-status active">Predicting</span>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric"><span class="m-label">RL Confidence</span> <span class="m-value" id="ssd-conf">78%</span></div>
+                        <div class="metric"><span class="m-label">IO Bottleneck</span> <span class="m-value" id="ssd-io">0%</span></div>
+                        <div class="metric"><span class="m-label">Patterns Learned</span> <span class="m-value" id="ssd-patterns">0</span></div>
+                    </div>
+                    <div class="ai-action" id="ssd-action">Pre-loading sequential chunks.</div>
+                </div>
+
+                <!-- Cache Node -->
+                <div class="component-card glass" id="node-cache">
+                    <div class="card-header">
+                        <h3>⚡ Cache</h3>
+                        <span class="ai-status">Stable</span>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric"><span class="m-label">RL Confidence</span> <span class="m-value" id="cache-conf">99%</span></div>
+                        <div class="metric"><span class="m-label">Hit Rate</span> <span class="m-value" id="cache-hit">98.5%</span></div>
+                        <div class="metric"><span class="m-label">Patterns Learned</span> <span class="m-value" id="cache-patterns">0</span></div>
+                    </div>
+                    <div class="ai-action" id="cache-action">Holding critical inodes dynamically.</div>
+                </div>
+            </div>
+
+            <!-- Global P2P Log -->
+            <div class="p2p-logger glass">
+                <div class="log-header">
+                    <h3>P2P Hardware Bus Ledger</h3>
+                    <div class="live-badge">LIVE</div>
+                </div>
+                <div class="log-content" id="p2p-log">
+                    <div class="log-entry"><span class="time">[00:00:12]</span> <span class="tag from">RAM</span> <span class="arrow">→</span> <span class="tag to">GPU</span> : VRAM Texture Swapped via DMA</div>
+                    <div class="log-entry"><span class="time">[00:00:14]</span> <span class="tag from">SSD</span> <span class="arrow">→</span> <span class="tag to">CACHE</span> : Inode Table Pushed (LSTM Prefetch)</div>
+                    <div class="log-entry"><span class="time">[00:00:15]</span> <span class="tag hint">SYNAPSE AI</span> : Reward +1.0 delivered to SSD Agent</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Terminal Window (hidden by default) -->
+        <div class="window glass" id="terminal-window" style="display: none;">
+            <div class="window-titlebar">
+                <span class="window-title">⌨ DIANA-Nexus Terminal</span>
+                <button class="window-close" onclick="toggleWindow('terminal-window')">✕</button>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+                <div class="term-line"><span class="term-prompt">root@diana-nexus:~#</span> <span class="term-cursor">_</span></div>
+            </div>
+            <input type="text" class="terminal-input" id="terminal-input" placeholder="Type command..." autocomplete="off">
+        </div>
+
+        <!-- File Manager Window (hidden by default) -->
+        <div class="window glass" id="files-window" style="display: none;">
+            <div class="window-titlebar">
+                <span class="window-title">📁 File Manager — /</span>
+                <button class="window-close" onclick="toggleWindow('files-window')">✕</button>
+            </div>
+            <div class="files-body">
+                <div class="file-item folder">📁 <span>bin</span></div>
+                <div class="file-item folder">📁 <span>boot</span></div>
+                <div class="file-item folder">📁 <span>dev</span></div>
+                <div class="file-item folder">📁 <span>etc</span></div>
+                <div class="file-item folder">📁 <span>proc</span></div>
+                <div class="file-item folder highlight">📁 <span>proc/diana</span></div>
+                <div class="file-item">📄 <span>proc/diana/stats</span></div>
+                <div class="file-item">📄 <span>proc/diana/hints</span></div>
+                <div class="file-item">📄 <span>proc/diana/p2p_log</span></div>
+                <div class="file-item">📄 <span>proc/diana/cpu_report</span></div>
+                <div class="file-item folder">📁 <span>usr/local/diana</span></div>
+                <div class="file-item folder">📁 <span>var/lib/diana/models</span></div>
+            </div>
+        </div>
+
+        <!-- AI Settings Window (hidden by default) -->
+        <div class="window glass" id="settings-window" style="display: none;">
+            <div class="window-titlebar">
+                <span class="window-title">⚙ SYNAPSE AI Settings</span>
+                <button class="window-close" onclick="toggleWindow('settings-window')">✕</button>
+            </div>
+            <div class="settings-body">
+                <div class="setting-group">
+                    <h4>Learning Configuration</h4>
+                    <div class="setting-row">
+                        <label>LSTM Learning Rate</label>
+                        <input type="range" min="1" max="100" value="10" class="setting-slider">
+                        <span class="setting-val">0.01</span>
+                    </div>
+                    <div class="setting-row">
+                        <label>RL Exploration (ε)</label>
+                        <input type="range" min="1" max="100" value="100" class="setting-slider">
+                        <span class="setting-val">1.00</span>
+                    </div>
+                    <div class="setting-row">
+                        <label>Training Interval</label>
+                        <input type="range" min="1" max="30" value="5" class="setting-slider">
+                        <span class="setting-val">5s</span>
+                    </div>
+                    <div class="setting-row">
+                        <label>Prefetch Confidence Threshold</label>
+                        <input type="range" min="50" max="100" value="70" class="setting-slider">
+                        <span class="setting-val">70%</span>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <h4>Component Brains</h4>
+                    <div class="brain-status">
+                        <div class="brain-row"><span>RAM Brain</span> <span class="brain-state trained">Trained (152 cycles)</span></div>
+                        <div class="brain-row"><span>GPU Brain</span> <span class="brain-state training">Training...</span></div>
+                        <div class="brain-row"><span>SSD Brain</span> <span class="brain-state trained">Trained (89 cycles)</span></div>
+                        <div class="brain-row"><span>Cache Brain</span> <span class="brain-state trained">Trained (203 cycles)</span></div>
+                    </div>
+                    <button class="btn-reset">Reset All Models (Start from Scratch)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Taskbar -->
+        <footer class="taskbar glass">
+            <div class="taskbar-left">
+                <span class="taskbar-label">DIANA-Nexus v1.0</span>
+            </div>
+            <div class="taskbar-center" id="taskbar-apps">
+                <!-- Active window indicators appear here -->
+            </div>
+            <div class="taskbar-right">
+                <span class="taskbar-stat" id="tb-p2p">P2P: <strong>0</strong> msgs</span>
+                <span class="taskbar-stat" id="tb-learn">Learn: <strong>Cycle 0</strong></span>
+                <span class="taskbar-stat" id="tb-pred">Pred: <strong>—</strong></span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

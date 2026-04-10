@@ -1,0 +1,3 @@
+savedcmd_/mnt/c/Users/ELCOT/.gemini/antigravity/scratch/DIANA-Architecture/kernel/diana_core.o := ld -m elf_x86_64 -z noexecstack --no-warn-rwx-segments   -r -o /mnt/c/Users/ELCOT/.gemini/antigravity/scratch/DIANA-Architecture/kernel/diana_core.o @/mnt/c/Users/ELCOT/.gemini/antigravity/scratch/DIANA-Architecture/kernel/diana_core.mod  ; ./tools/objtool/objtool --hacks=jump_label --hacks=noinstr --hacks=skylake --ibt --retpoline --rethunk --stackval --static-call --uaccess --prefix=16  --link  --module /mnt/c/Users/ELCOT/.gemini/antigravity/scratch/DIANA-Architecture/kernel/diana_core.o
+
+/mnt/c/Users/ELCOT/.gemini/antigravity/scratch/DIANA-Architecture/kernel/diana_core.o: $(wildcard ./tools/objtool/objtool)
